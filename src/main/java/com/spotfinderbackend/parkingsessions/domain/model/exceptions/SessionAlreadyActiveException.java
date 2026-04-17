@@ -1,7 +1,9 @@
 package com.spotfinderbackend.parkingsessions.domain.model.exceptions;
 
-public class SessionAlreadyActiveException extends RuntimeException {
-    public SessionAlreadyActiveException(String message) {
-        super(message);
+import com.spotfinderbackend.shared.domain.model.exceptions.BusinessRuleException;
+
+public class SessionAlreadyActiveException extends BusinessRuleException {
+    public SessionAlreadyActiveException(Long vehicleId) {
+        super("Vehicle " + vehicleId + " already has an active session");
     }
 }
