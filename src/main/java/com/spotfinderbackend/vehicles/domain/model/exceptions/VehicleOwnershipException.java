@@ -1,7 +1,9 @@
 package com.spotfinderbackend.vehicles.domain.model.exceptions;
 
-public class VehicleOwnershipException extends RuntimeException {
-    public VehicleOwnershipException(String message) {
-        super(message);
+import com.spotfinderbackend.shared.domain.model.exceptions.BusinessRuleException;
+
+public class VehicleOwnershipException extends BusinessRuleException {
+    public VehicleOwnershipException() {
+        super("Vehicle does not belong to the user");
     }
 }

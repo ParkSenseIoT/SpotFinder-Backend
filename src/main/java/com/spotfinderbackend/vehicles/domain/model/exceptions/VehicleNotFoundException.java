@@ -1,7 +1,9 @@
 package com.spotfinderbackend.vehicles.domain.model.exceptions;
 
-public class VehicleNotFoundException extends RuntimeException {
-    public VehicleNotFoundException(String message) {
-        super(message);
+import com.spotfinderbackend.shared.domain.model.exceptions.NotFoundException;
+
+public class VehicleNotFoundException extends NotFoundException {
+    public VehicleNotFoundException(Long id) {
+        super("Vehicle with id " + id + " not found");
     }
 }
