@@ -21,4 +21,7 @@ public class ParkingSlotCode {
         this.value = value;
     }
 
+    public String value() {
+        return value;
+    }
 }

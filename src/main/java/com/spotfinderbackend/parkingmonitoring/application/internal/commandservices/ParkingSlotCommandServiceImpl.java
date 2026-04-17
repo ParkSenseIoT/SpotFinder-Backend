@@ -5,7 +5,6 @@ import com.spotfinderbackend.parkingmonitoring.domain.model.commands.CreateParki
 import com.spotfinderbackend.parkingmonitoring.domain.model.commands.UpdateParkingSlotStatusCommand;
 import com.spotfinderbackend.parkingmonitoring.domain.model.exceptions.*;
 import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.ParkingSlotCode;
-import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.ParkingSlotStatus;
 import com.spotfinderbackend.parkingmonitoring.domain.services.ParkingSlotCommandService;
 import com.spotfinderbackend.parkingmonitoring.infrastructure.persistence.jpa.repositories.ParkingSlotRepository;
 import org.springframework.stereotype.Service;
