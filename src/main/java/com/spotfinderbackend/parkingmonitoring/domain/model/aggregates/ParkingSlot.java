@@ -1,6 +1,7 @@
 package com.spotfinderbackend.parkingmonitoring.domain.model.aggregates;
 
 import com.spotfinderbackend.parkingmonitoring.domain.model.exceptions.InvalidParkingSlotStatusException;
+import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.ParkingSlotCode;
 import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.ParkingSlotStatus;
 import com.spotfinderbackend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 import jakarta.persistence.*;
@@ -10,14 +11,15 @@ import lombok.Getter;
 @Entity
 public class ParkingSlot extends AuditableAbstractAggregateRoot<ParkingSlot> {
 
-    private String code; // Ej: A1, B12, etc.
+    @Embedded
+    private ParkingSlotCode code; // Ej: A1, B12, etc.
 
     @Enumerated(EnumType.STRING)
     private ParkingSlotStatus status;
 
     protected ParkingSlot() {}
 
-    public ParkingSlot(String code) {
+    public ParkingSlot(ParkingSlotCode code) {
         this.code = code;
         this.status = ParkingSlotStatus.AVAILABLE; // default
     }

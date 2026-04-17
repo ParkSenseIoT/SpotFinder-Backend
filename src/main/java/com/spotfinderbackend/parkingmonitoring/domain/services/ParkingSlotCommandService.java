@@ -5,7 +5,7 @@ import com.spotfinderbackend.parkingmonitoring.domain.model.commands.UpdateParki
 
 public interface ParkingSlotCommandService {
 
-    void handle(CreateParkingSlotCommand command);
+    Long handle(CreateParkingSlotCommand command);
 
     void handle(UpdateParkingSlotStatusCommand command);
 }

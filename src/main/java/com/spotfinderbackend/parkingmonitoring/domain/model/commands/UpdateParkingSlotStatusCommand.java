@@ -4,11 +4,11 @@ import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.Parking
 import com.spotfinderbackend.shared.domain.model.exceptions.BadRequestException;
 
 public record UpdateParkingSlotStatusCommand(
-        Long parkingSlotId,
+        Long slotId,
         ParkingSlotStatus status
 ) {
     public UpdateParkingSlotStatusCommand {
-        if (parkingSlotId == null || parkingSlotId <= 0) {
+        if (slotId == null || slotId <= 0) {
             throw new BadRequestException("ParkingSlotId is required");
         }
 

@@ -1,6 +1,7 @@
 package com.spotfinderbackend.parkingmonitoring.infrastructure.persistence.jpa.repositories;
 
 import com.spotfinderbackend.parkingmonitoring.domain.model.aggregates.ParkingSlot;
+import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.ParkingSlotCode;
 import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.ParkingSlotStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,7 +14,7 @@ public interface ParkingSlotRepository extends JpaRepository<ParkingSlot, Long> 
     List<ParkingSlot> findByStatus(ParkingSlotStatus status);
 
     // para validaciones (ej: evitar duplicados de código)
-    Optional<ParkingSlot> findByCode(String code);
+    Optional<ParkingSlot> findByCode(ParkingSlotCode code);
 
-    boolean existsByCode(String code);
+    boolean existsByCode(ParkingSlotCode code);
 }
