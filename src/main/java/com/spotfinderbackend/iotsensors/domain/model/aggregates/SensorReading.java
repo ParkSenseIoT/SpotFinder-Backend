@@ -30,16 +30,16 @@ public class SensorReading extends AuditableAbstractAggregateRoot<SensorReading>
 
     public SensorReading(Long sensorId,
                          SensorType type,
-                         SensorStatus status,
                          Double value,
                          String unit) {
 
         this.sensorId = sensorId;
         this.type = type;
-        this.status = status;
         this.value = value;
         this.unit = unit;
         this.recordedAt = LocalDateTime.now();
+
+        this.status = evaluateStatus();
     }
 
     // DOMAIN LOGIC
@@ -50,5 +50,19 @@ public class SensorReading extends AuditableAbstractAggregateRoot<SensorReading>
 
     public void markAsError() {
         this.status = SensorStatus.ERROR;
+    }
+
+    private SensorStatus evaluateStatus() {
+
+        if (value == null)
+            return SensorStatus.ERROR;
+
+        if (value <= 0)
+            return SensorStatus.ERROR;
+
+        if (value < 50)
+            return SensorStatus.OK;
+
+        return SensorStatus.WARNING;
     }
 }
