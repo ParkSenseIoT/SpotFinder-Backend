@@ -1,4 +1,4 @@
-package com.spotfinderbackend.iotsensors.domain.infrastructure.persistence.jpa.repositories;
+package com.spotfinderbackend.iotsensors.infrastructure.persistence.jpa.repositories;
 
 import com.spotfinderbackend.iotsensors.domain.model.aggregates.SensorReading;
 import org.springframework.data.jpa.repository.JpaRepository;
