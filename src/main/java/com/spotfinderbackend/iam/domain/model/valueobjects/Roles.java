@@ -5,5 +5,6 @@ package com.spotfinderbackend.iam.domain.model.valueobjects;
  */
 
 public enum Roles {
-    ADMIN
+    ADMIN,
+    DRIVER
 }
