@@ -69,7 +69,7 @@ public class EmergencyCommandServiceImpl implements EmergencyCommandService {
                 new CreateNotificationCommand(
                         0L, //  broadcast (luego mejora)
                         "EMERGENCY ALERT",
-                        NotificationType.EMERGENCY,
+                        NotificationType.EMERGENCY_ALERT,
                         "Evacuation protocol activated"
                 )
         );
