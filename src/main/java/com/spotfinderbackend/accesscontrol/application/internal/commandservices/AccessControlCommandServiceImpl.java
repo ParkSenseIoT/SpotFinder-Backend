@@ -113,4 +113,10 @@ public class AccessControlCommandServiceImpl implements AccessControlCommandServ
         // MOCK
         return new AlprResult("ABC-123", true);
     }
+
+    @Override
+    public void handle(OpenAllBarriersCommand command) {
+        // SIMULACIÓN MODIFICAR LUEGO
+        System.out.println("🚧 All barriers opened (EVACUATION MODE)");
+    }
 }
