@@ -1,6 +1,7 @@
 package com.spotfinderbackend.parkingmonitoring.domain.services;
 
 import com.spotfinderbackend.parkingmonitoring.domain.model.commands.CreateParkingSlotCommand;
+import com.spotfinderbackend.parkingmonitoring.domain.model.commands.SetEvacuationModeCommand;
 import com.spotfinderbackend.parkingmonitoring.domain.model.commands.UpdateParkingSlotStatusCommand;
 
 public interface ParkingSlotCommandService {
@@ -8,4 +9,6 @@ public interface ParkingSlotCommandService {
     Long handle(CreateParkingSlotCommand command);
 
     void handle(UpdateParkingSlotStatusCommand command);
+
+    void handle(SetEvacuationModeCommand command);
 }
