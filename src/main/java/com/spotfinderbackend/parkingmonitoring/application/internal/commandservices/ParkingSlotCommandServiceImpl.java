@@ -2,6 +2,7 @@ package com.spotfinderbackend.parkingmonitoring.application.internal.commandserv
 
 import com.spotfinderbackend.parkingmonitoring.domain.model.aggregates.ParkingSlot;
 import com.spotfinderbackend.parkingmonitoring.domain.model.commands.CreateParkingSlotCommand;
+import com.spotfinderbackend.parkingmonitoring.domain.model.commands.SetEvacuationModeCommand;
 import com.spotfinderbackend.parkingmonitoring.domain.model.commands.UpdateParkingSlotStatusCommand;
 import com.spotfinderbackend.parkingmonitoring.domain.model.exceptions.*;
 import com.spotfinderbackend.parkingmonitoring.domain.model.valueobjects.ParkingSlotCode;
@@ -51,5 +52,11 @@ public class ParkingSlotCommandServiceImpl implements ParkingSlotCommandService 
         }
 
         repository.save(slot);
+    }
+
+    @Override
+    public void handle(SetEvacuationModeCommand command) {
+        // SIMULACIÓN
+        System.out.println("Parking in EVACUATION MODE (LEDs RED)");
     }
 }
