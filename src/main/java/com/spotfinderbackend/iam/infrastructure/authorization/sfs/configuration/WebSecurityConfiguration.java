@@ -92,6 +92,8 @@ public class WebSecurityConfiguration {
                                 "/api/v1/sensor-readings",
                                 "/api/v1/emergency/alerts",
                                 "/api/v1/access/alpr",
+                                "/api/v1/access/entries",
+                                "/api/v1/access/exits",
                                 "/ws/**"
                         ).permitAll()
                         .anyRequest().authenticated()
