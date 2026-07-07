@@ -43,14 +43,13 @@ public class PlateRecognizerClient implements PlateRecognitionService {
             @Value("${platerecognizer.api-url:https://api.platerecognizer.com/v1/plate-reader/}") String apiUrl,
             @Value("${platerecognizer.api-token:}") String apiToken,
             @Value("${platerecognizer.regions:}") String regions,
-            @Value("${platerecognizer.stub-fallback:true}") boolean stubFallback,
-            RestClient.Builder restClientBuilder
+            @Value("${platerecognizer.stub-fallback:true}") boolean stubFallback
     ) {
         this.apiUrl = apiUrl;
         this.apiToken = apiToken;
         this.regions = regions;
         this.stubFallback = stubFallback;
-        this.restClient = restClientBuilder.build();
+        this.restClient = RestClient.create();
     }
 
     @Override
