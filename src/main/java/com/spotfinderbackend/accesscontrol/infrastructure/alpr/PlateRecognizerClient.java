@@ -1,6 +1,7 @@
 package com.spotfinderbackend.accesscontrol.infrastructure.alpr;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spotfinderbackend.accesscontrol.domain.model.valueobjects.LicensePlate;
 import com.spotfinderbackend.accesscontrol.domain.services.PlateRecognitionService;
 import org.slf4j.Logger;
@@ -38,6 +39,7 @@ public class PlateRecognizerClient implements PlateRecognitionService {
     private final String regions;
     private final boolean stubFallback;
     private final RestClient restClient;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public PlateRecognizerClient(
             @Value("${platerecognizer.api-url:https://api.platerecognizer.com/v1/plate-reader/}") String apiUrl,
@@ -79,14 +81,18 @@ public class PlateRecognizerClient implements PlateRecognitionService {
                 }
             }
 
-            JsonNode response = restClient.post()
+            // Read the body as text and parse it with our own ObjectMapper. The
+            // default converters in Spring Boot 4 (Jackson 3) cannot bind directly
+            // to the Jackson 2 JsonNode, so String is the version-safe transport.
+            String json = restClient.post()
                     .uri(apiUrl)
                     .header(HttpHeaders.AUTHORIZATION, "Token " + apiToken)
                     .contentType(MediaType.MULTIPART_FORM_DATA)
                     .body(form)
                     .retrieve()
-                    .body(JsonNode.class);
+                    .body(String.class);
 
+            JsonNode response = (json == null || json.isBlank()) ? null : objectMapper.readTree(json);
             return parseResponse(response);
         } catch (Exception ex) {
             LOG.error("Plate Recognizer call failed: {}", ex.getMessage());

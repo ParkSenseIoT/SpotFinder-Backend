@@ -94,6 +94,8 @@ public class WebSecurityConfiguration {
                                 "/api/v1/access/alpr",
                                 "/api/v1/access/entries",
                                 "/api/v1/access/exits",
+                                "/api/v1/access/capture",
+                                "/api/v1/access/capture/**",
                                 "/ws/**"
                         ).permitAll()
                         .anyRequest().authenticated()

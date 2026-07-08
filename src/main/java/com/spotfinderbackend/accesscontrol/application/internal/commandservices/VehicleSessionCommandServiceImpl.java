@@ -6,7 +6,6 @@ import com.spotfinderbackend.accesscontrol.domain.model.commands.EndVehicleSessi
 import com.spotfinderbackend.accesscontrol.domain.model.valueobjects.SessionStatus;
 import com.spotfinderbackend.accesscontrol.domain.services.VehicleSessionCommandService;
 import com.spotfinderbackend.accesscontrol.infrastructure.persistence.jpa.repositories.VehicleSessionRepository;
-import com.spotfinderbackend.shared.domain.model.exceptions.ConflictException;
 import com.spotfinderbackend.shared.domain.model.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +24,13 @@ public class VehicleSessionCommandServiceImpl implements VehicleSessionCommandSe
 
     @Override
     public Optional<VehicleSession> handle(CreateVehicleSessionCommand command) {
-        if (repository.existsByLicensePlate_PlateTextAndSessionStatus(
-                command.licensePlate().toUpperCase().trim(), SessionStatus.ACTIVE))
-            throw new ConflictException("Active session already exists for plate " + command.licensePlate());
+        var plate = command.licensePlate().toUpperCase().trim();
+        // Idempotent entry: if the vehicle is already inside (active session), return
+        // that session instead of failing. Lets the barrier / app re-verify the same
+        // plate (on-demand "Verificar placa") without a duplicate-session conflict.
+        var existing = repository.findByLicensePlate_PlateTextAndSessionStatus(plate, SessionStatus.ACTIVE);
+        if (existing.isPresent())
+            return existing;
         var session = new VehicleSession(command);
         return Optional.of(repository.save(session));
     }
